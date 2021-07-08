@@ -1,10 +1,9 @@
 package org.softwire.training.bookish;
 
+import org.apache.tomcat.util.buf.StringCache;
 import org.jdbi.v3.core.Jdbi;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 
 public class Main {
@@ -27,6 +26,18 @@ public class Main {
         // See this page for details: https://docs.oracle.com/javase/tutorial/jdbc/basics/processingsqlstatements.html
 
         Connection connection = DriverManager.getConnection(connectionString);
+        String query = "select id_books, title, author from Books";
+        try (Statement stmt = connection.createStatement()) {
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                int id_books = rs.getInt("id_books");
+                String title = rs.getString("title");
+                String author = rs.getString("author");
+                System.out.println("bookids: " + String.valueOf(id_books) + " title: " + title + " author: " + author);
+            }
+        } catch (SQLException e) {
+            System.out.println("error occured");
+        }
 
 
 
