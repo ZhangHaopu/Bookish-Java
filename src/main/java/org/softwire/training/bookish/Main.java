@@ -2,8 +2,10 @@ package org.softwire.training.bookish;
 
 import org.apache.tomcat.util.buf.StringCache;
 import org.jdbi.v3.core.Jdbi;
+import org.softwire.training.bookish.models.database.Book;
 
 import java.sql.*;
+import java.util.List;
 
 
 public class Main {
@@ -38,21 +40,23 @@ public class Main {
         } catch (SQLException e) {
             System.out.println("error occured");
         }
-
-
-
     }
 
     private static void jdbiMethod(String connectionString) {
         System.out.println("\nJDBI method...");
-
         // TODO: print out the details of all the books (using JDBI)
         // See this page for details: http://jdbi.org
         // Use the "Book" class that we've created for you (in the models.database folder)
 
         Jdbi jdbi = Jdbi.create(connectionString);
 
+        List<Book> books = jdbi.withHandle(handle -> {
+            return handle.createQuery("SELECT * FROM Books")
+                    .mapToBean(Book.class)
+                    .list();
+        });
 
-
+        for(Book book: books)
+            System.out.println("bookids: " + String.valueOf(book.id_books) + " title: " + book.title + " author: " + book.author);
     }
 }
