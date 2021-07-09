@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Books` (
   `id_books` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(45) NULL,
   `author` VARCHAR(45) NULL,
+  `isbn` VARCHAR(45) NULL,
   PRIMARY KEY (`id_books`))
 ENGINE = InnoDB;
 

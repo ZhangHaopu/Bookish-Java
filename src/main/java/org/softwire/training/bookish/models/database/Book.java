@@ -4,6 +4,7 @@ public class Book {
     public Integer id_books;
     public String title;
     public String author;
+    public String isbn;
 
     public Integer getId_books() {
         return id_books;
@@ -27,5 +28,13 @@ public class Book {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 }

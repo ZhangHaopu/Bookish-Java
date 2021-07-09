@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -24,8 +25,8 @@ public class CatalogueController {
     }
 
     @RequestMapping("")
-    ModelAndView search(@ModelAttribute("title") String title) {
-        List<Book> books = catalogueService.getBooksByTitle(title);
+    ModelAndView search(@RequestParam("title") String title, @RequestParam("author") String author) {
+        List<Book> books = catalogueService.getBooksByTitleAndAuthor(title, author);
 
         return new ModelAndView("catalogue", "books", books);
     }

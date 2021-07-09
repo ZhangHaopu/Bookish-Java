@@ -32,4 +32,5 @@ public class TechnologyService extends DatabaseService {
                         .execute()
         );
     }
+
 }
