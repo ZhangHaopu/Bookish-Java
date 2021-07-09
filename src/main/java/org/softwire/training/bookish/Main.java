@@ -3,6 +3,10 @@ package org.softwire.training.bookish;
 import org.apache.tomcat.util.buf.StringCache;
 import org.jdbi.v3.core.Jdbi;
 import org.softwire.training.bookish.models.database.Book;
+import org.softwire.training.bookish.models.database.CopyWithLoanInfo;
+import org.softwire.training.bookish.models.database.Member;
+import org.softwire.training.bookish.services.CatalogueService;
+import org.softwire.training.bookish.services.MembersService;
 
 import java.sql.*;
 import java.util.List;
@@ -16,6 +20,19 @@ public class Main {
         String user = "root";
         String password = "password";
         String connectionString = "jdbc:mysql://" + hostname + "/" + database + "?user=" + user + "&password=" + password + "&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT&useSSL=false";
+
+        List<CopyWithLoanInfo> copies = new CatalogueService().getCopiesByBookId(1);
+        for(CopyWithLoanInfo copy : copies) {
+            System.out.println(copy.getCopy_id());
+            if(!copy.isAvailable()) {
+                System.out.println("Loaned by " + copy.getMember_name() + " due " + copy.getDue_date());
+            }
+        }
+
+        List<Member> members = new MembersService().getMembers();
+        for(Member member : members)
+            System.out.println(member.name);
+
 
         jdbcMethod(connectionString);
         jdbiMethod(connectionString);

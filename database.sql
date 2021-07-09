@@ -33,7 +33,7 @@ ENGINE = InnoDB;
 -- Table `mydb`.`Members`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Members` (
-  `id_members` INT NOT NULL,
+  `id_members` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
   PRIMARY KEY (`id_members`))
 ENGINE = InnoDB;
@@ -43,7 +43,7 @@ ENGINE = InnoDB;
 -- Table `mydb`.`CopiesOfBook`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`CopiesOfBook` (
-  `id_copyofbooks` INT NOT NULL,
+  `id_copyofbooks` INT NOT NULL AUTO_INCREMENT,
   `deletedDate` DATETIME NULL,
   `id` INT NULL,
   `available` TINYINT NULL,
