@@ -6,7 +6,9 @@ import org.softwire.training.bookish.models.database.Book;
 import org.softwire.training.bookish.models.database.CopyWithLoanInfo;
 import org.softwire.training.bookish.models.database.Member;
 import org.softwire.training.bookish.services.CatalogueService;
+import org.softwire.training.bookish.services.CheckService;
 import org.softwire.training.bookish.services.MembersService;
+import org.springframework.cglib.proxy.CallbackHelper;
 
 import java.sql.*;
 import java.util.List;
@@ -32,6 +34,13 @@ public class Main {
         List<Member> members = new MembersService().getMembers();
         for(Member member : members)
             System.out.println(member.name);
+
+        CheckService checkService = new CheckService();
+
+        List<CopyWithLoanInfo> loanedCopies = checkService.getLoanedCopies();
+        for(CopyWithLoanInfo copy : loanedCopies)
+            System.out.println("Copy " + copy.getCopy_id() + " of " + copy.getTitle() + " loaned by " + copy.getMember_name() + " due " + copy.getDue_date());
+
 
 
         jdbcMethod(connectionString);

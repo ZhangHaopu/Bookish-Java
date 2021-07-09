@@ -29,13 +29,13 @@ public class CatalogueService extends DatabaseService{
 
     public List<CopyWithLoanInfo> getCopiesByBookId(int book_id){
         return jdbi.withHandle(handle ->
-                handle.createQuery("SELECT id_copyofbooks AS copy_id, available, members.name AS member_name, transactions.outDate AS out_date, transactions.dueDate as due_date " +
+                handle.createQuery("SELECT id_copyofbooks AS copy_id, available, members.name AS member_name, transactions.outDate AS out_date, transactions.dueDate AS due_date " +
                         "FROM copiesOfBook " +
-                        "LEFT JOIN transactions ON copiesOfBook.id_copyofbooks = transactions.bookid " +
+                        "LEFT JOIN transactions ON copiesOfBook.id_copyofbooks = transactions.bookid AND transactions.returnDate IS NULL " +
                         "LEFT JOIN members ON transactions.userid = members.id_members " +
                         "WHERE copiesOfBook.id = :book_id " +
                         "AND copiesOfBook.deletedDate IS NULL " +
-                        "AND transactions.returnDate IS NULL")
+                        "")
                         .bind("book_id", book_id)
                         .mapToBean(CopyWithLoanInfo.class)
                         .list()

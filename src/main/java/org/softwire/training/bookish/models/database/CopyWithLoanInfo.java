@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 public class CopyWithLoanInfo {
     int copy_id;
+    String title;
+    String author;
     boolean available;
     String member_name;
     LocalDateTime due_date;
@@ -47,5 +49,21 @@ public class CopyWithLoanInfo {
 
     public void setCopy_id(int copy_id) {
         this.copy_id = copy_id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        author = author;
     }
 }
